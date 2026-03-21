@@ -1,0 +1,162 @@
+/* ================================
+   BEATFLOW — ANIMATIONS CSS
+================================ */
+
+/* ===== PAGE TRANSITIONS ===== */
+.page { transition: opacity 0.25s ease, transform 0.25s ease; }
+
+/* ===== SLIDE UP (Bottom sheets, Queue) ===== */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.bottom-sheet:not(.hidden),
+.queue-panel:not(.hidden) {
+  animation: slideUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== FADE IN ===== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlay:not(.hidden),
+.dialog:not(.hidden) {
+  animation: fadeIn 0.2s ease;
+}
+
+/* ===== FULL PLAYER SLIDE ===== */
+@keyframes playerSlideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.full-player:not(.hidden) {
+  animation: playerSlideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== TOAST ===== */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; transform: translateX(-50%) translateY(0); }
+  to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
+
+.toast:not(.hidden) { animation: toastIn 0.3s ease; }
+.toast.hiding { animation: toastOut 0.3s ease forwards; }
+
+/* ===== SKELETON SHIMMER ===== */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== SPIN (Loading) ===== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinning { animation: spin 1s linear infinite; }
+
+/* ===== EQUALIZER BARS (Now Playing indicator) ===== */
+@keyframes bar1 {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+@keyframes bar2 {
+  0%, 100% { height: 10px; }
+  50% { height: 4px; }
+}
+
+@keyframes bar3 {
+  0%, 100% { height: 7px; }
+  30% { height: 14px; }
+  70% { height: 4px; }
+}
+
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.equalizer__bar {
+  width: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.equalizer__bar:nth-child(1) { animation: bar1 0.8s ease-in-out infinite; }
+.equalizer__bar:nth-child(2) { animation: bar2 0.8s ease-in-out infinite 0.2s; }
+.equalizer__bar:nth-child(3) { animation: bar3 0.8s ease-in-out infinite 0.4s; }
+
+/* ===== HEART ANIMATION ===== */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* ===== WAVE ANIMATION ===== */
+@keyframes wave {
+  0% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.5); }
+}
+
+/* ===== RIPPLE ===== */
+@keyframes ripple {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(4); opacity: 0; }
+}
+
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+}
+
+.ripple:active::after { animation: ripple 0.5s ease-out; }
+
+/* ===== SMOOTH TRANSITIONS ===== */
+.sidebar,
+.mini-player,
+.full-player,
+.bottom-sheet,
+.queue-panel,
+.overlay { transition-property: transform, opacity, background; }
+
+/* ===== ART ROTATION (paused state) ===== */
+@keyframes artRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ===== LYRIC HIGHLIGHT ===== */
+.lyric-line {
+  transition: color 0.4s ease, font-size 0.4s ease, opacity 0.4s ease;
+}
+
+/* ===== PROGRESS BAR GLOW ===== */
+.mini-player__progress-bar {
+  box-shadow: 0 0 8px rgba(168, 237, 188, 0.4);
+}
